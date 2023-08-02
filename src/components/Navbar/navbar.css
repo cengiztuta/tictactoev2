@@ -1,0 +1,44 @@
+.app_navbar{
+    display: flex;
+    flex-direction: row;
+    background-color: #101828;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+}
+
+.app_navbar a {
+    text-decoration: none;
+}
+
+.app_header{
+    font-size: 24px;
+    color: #f2f4f7;
+    font-weight: bolder;
+}
+
+.app_navbar .navlist{
+    display: flex;
+    color: white;
+    list-style: none;
+}
+
+.app_navbar .navlist .item {
+    padding: 1rem;
+   
+    color: white;
+    font-weight: bolder;
+    margin-right: 1rem; 
+    border-radius: 15px;    
+}
+.app_navbar .navlist .item a{
+    color: #f2f4f7;
+     font-size: 18px;
+  
+}
+.app_navbar .navlist .item:hover{
+    background-color: #344054;
+}
+.app_navbar .navlist .item.active{
+    background-color: #344054;
+}

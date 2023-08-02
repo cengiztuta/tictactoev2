@@ -1,0 +1,15 @@
+.leaderboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    padding-right: 150px;
+  }
+  
+  .leaderboard-statistics {
+    display: flex;
+    justify-content: space-around;
+    width: 60%;
+    padding-right:  14%;;
+    padding-bottom: 15px;
+    
+  }
