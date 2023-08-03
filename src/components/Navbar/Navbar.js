@@ -2,20 +2,11 @@ import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./navbar.css";
 
-import {auth} from '../../pages/firebase-config'
+import { auth } from "../../pages/firebase-config";
 
 import { getAuth, signOut } from "firebase/auth";
 
-
-
-
-
-
-
-
 const Navbar = () => {
-
-
   const navigate = useNavigate();
   const userID = useRef();
   const password = useRef();
@@ -24,27 +15,21 @@ const Navbar = () => {
   const localPassword = localStorage.getItem("password");
   const auth = getAuth();
 
-const logout = () => {
-  signOut(auth).then(() => {
-    navigate('/')
-    // Sign-out successful.
-  }).catch((error) => {
-    // An error happened.
-  });
-  
-}
- 
-  
+  const logout = () => {
+    signOut(auth)
+      .then(() => {
+        navigate("/");
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
 
-
-  // const logout = () => {
-  //   localStorage.removeItem("signUp");
-  //   navigate("/");
-  // };
 
   return (
     <nav className="app_navbar">
-      <a className="app_header">TIC TAC TOE</a>
+      <a href="/Game" className="app_header">TIC TAC TOE</a>
       <ul className="navlist">
         {/* <li className="item active">
           <a href="/MatchHistory">Match History </a>

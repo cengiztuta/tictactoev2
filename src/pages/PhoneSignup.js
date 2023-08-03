@@ -100,6 +100,7 @@ const PhoneSignup = () => {
           phone: user.mynumber,
           TotalGames: 0,
           date: "",
+          gameHistory: [{}],
         };
         const docRef = await setDoc(
           doc(usersCollectionRef, result.user.uid),

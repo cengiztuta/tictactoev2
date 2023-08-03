@@ -26,8 +26,6 @@ const HomePage = () => {
   const [show, setshow] = useState(false);
   const [final, setfinal] = useState("");
   const navigate = useNavigate();
-  const [mynumber, setnumber] = useState("");
-  const [otp, setOtp] = useState("");
   const [user, setUser] = useState({
     mynumber: "",
     nickName: "",
@@ -71,7 +69,7 @@ const HomePage = () => {
         return false;
       } else {
         return true;
-      }     
+      }
     };
     isNumberExists().then((res) => {
       console.log(res);

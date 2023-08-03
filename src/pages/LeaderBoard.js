@@ -11,12 +11,6 @@ import Navbar from "../components/Navbar/Navbar";
 import { auth, db } from "./firebase-config";
 import { getDocs, doc, updateDoc, collection } from "firebase/firestore";
 
-
-
-
-
-
-
 export default function LeaderBoard() {
   const [leaderboard, setLeaderboard] = useState([]);
 
