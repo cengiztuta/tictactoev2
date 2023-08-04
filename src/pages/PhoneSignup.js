@@ -99,8 +99,7 @@ const PhoneSignup = () => {
           uid: result.user.uid,
           phone: user.mynumber,
           TotalGames: 0,
-          date: "",
-          gameHistory: [{}],
+          gameHistory: [],  
         };
         const docRef = await setDoc(
           doc(usersCollectionRef, result.user.uid),

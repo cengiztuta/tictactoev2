@@ -8,8 +8,10 @@ const Board = () => {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [isUserTurn, setIsUserTurn] = useState(true);
   const [status, setStatus] = useState("");
+  const [gameHistory, setGameHistory] = useState([]);
   const [updatedUser, setUpdatedUser] = useState({});
   const loggedUser = auth.currentUser.uid;
+  const asd = auth.currentUser.gameHistory;
   const userDocRef = doc(db, "users", loggedUser);
   const [user, setUser] = useState({});
   useEffect(() => {
@@ -17,6 +19,7 @@ const Board = () => {
       const userDoc = await getDoc(userDocRef);
       setUpdatedUser(userDoc.data());
       setUser(userDoc.data());
+      setGameHistory(userDoc.data().gameHistory);
     };
     getUser();
   }, []);
@@ -39,7 +42,7 @@ const Board = () => {
         squares[a] === squares[b] &&
         squares[a] === squares[c]
       ) {
-        return squares[a]; // X or O
+        return squares[a];
       }
     }
     return null;
@@ -50,22 +53,20 @@ const Board = () => {
     setSquares(Array(9).fill(null));
   };
   const makeBotMove = (board) => {
-    setTimeout(() => {
-      const availableMoves = [];
-      for (let i = 0; i < board.length; i++) {
-        if (!board[i]) {
-          availableMoves.push(i);
-        }
+    const availableMoves = [];
+    for (let i = 0; i < board.length; i++) {
+      if (!board[i]) {
+        availableMoves.push(i);
       }
-      if (availableMoves.length === 0) return;
+    }
+    if (availableMoves.length === 0) return;
 
-      const randomIndex = Math.floor(Math.random() * availableMoves.length);
-      const botMove = availableMoves[randomIndex];
-      const updatedBoard = [...board];
-      updatedBoard[botMove] = "O";
-      setSquares(updatedBoard);
-      setIsUserTurn(true);
-    }, 750);
+    const randomIndex = Math.floor(Math.random() * availableMoves.length);
+    const botMove = availableMoves[randomIndex];
+    const updatedBoard = [...board];
+    updatedBoard[botMove] = "O";
+    setSquares(updatedBoard);
+    setIsUserTurn(true);
   };
 
   const handleClick = (index) => {
@@ -78,19 +79,54 @@ const Board = () => {
     setSquares(updatedBoard);
     setIsUserTurn(!isUserTurn);
   };
-
+  const date = new Date();
   const winner = calculateWinner(squares);
 
   const updateFirestore = async (winner) => {
     if (winner === "X") {
+      setGameHistory([
+        ...gameHistory,
+        {
+          rival: "bot",
+          result: "win",
+          date: date,
+        },
+      ]);
+      updatedUser.gameHistory = gameHistory;
       updatedUser.win += 1;
     } else if (winner === "O") {
+      setGameHistory([
+        ...gameHistory,
+        {
+          rival: "bot",
+          result: "lose",
+          date: date,
+        },
+      ]);
+      updatedUser.gameHistory = gameHistory;
       updatedUser.loss += 1;
     } else {
+      setGameHistory([
+        ...gameHistory,
+        {
+          rival: "bot",
+          result: "tie",
+          date: date,
+        },
+      ]);
+      updatedUser.gameHistory = gameHistory;
       updatedUser.tie += 1;
     }
-    await updateDoc(userDocRef, updatedUser);
+    await updateDoc(userDocRef, updatedUser, gameHistory);
   };
+
+  useEffect(() => {
+    if (!isUserTurn && !winner) {
+      setTimeout(() => {
+        makeBotMove(squares);
+      }, 500);
+    }
+  }, [isUserTurn]);
 
   useEffect(() => {
     if (winner) {
@@ -100,13 +136,9 @@ const Board = () => {
       setStatus("Tie Game");
       updateFirestore();
     } else {
-      setStatus(`Next Player: ${isUserTurn ? user.username : "O"}`);
-
-      if (!isUserTurn) {
-        makeBotMove(squares);
-      }
+      setStatus(`Next Player: ${isUserTurn ? user.username : "Bot"}`);
     }
-  }, [squares, isUserTurn, winner]);
+  }, [isUserTurn, winner]);
 
   return (
     <div className="board">
@@ -134,3 +166,57 @@ const Board = () => {
 };
 
 export default Board;
+
+// const updateFirestore = async (winner) => {
+//   if (winner === "X") { console.log(updatedUser.gameHistory)
+//     updatedUser.gameHistory[0] === 0
+//       ? setGameHistory([
+//           {
+//             rival: "Bot",
+//             result: "win",
+//             date:date
+//           },
+//         ])
+//       : setGameHistory([
+//           ...gameHistory,
+//           {
+//             rival: "Bot",
+//             result: "win",
+//             date:date
+//           },
+//         ]);
+//     updatedUser.gameHistory = gameHistory;
+//     updatedUser.win += 1;
+//   } else if (winner === "O") {
+//     updatedUser.gameHistory === 0
+//       ? setGameHistory([
+//           {
+//             rival: "Bot",
+//             result: "Loss",
+//             date:date
+//           },
+//         ])
+//       : setGameHistory([
+//           ...gameHistory,
+//           {
+//             rival: "Bot",
+//             result: "Loss",
+//             date:date
+//           },
+//         ]);
+//     updatedUser.gameHistory = gameHistory;
+//     updatedUser.loss += 1;
+//   } else {
+//     setGameHistory([
+//       ...gameHistory,
+//       {
+//         rival: "Bot",
+//         result: "Tie",
+//         date: date,
+//       },
+//     ]);
+//     updatedUser.gameHistory = gameHistory;
+//     updatedUser.tie += 1;
+//   }
+//   await updateDoc(userDocRef, updatedUser);
+// };
