@@ -31,9 +31,9 @@ const Navbar = () => {
     <nav className="app_navbar">
       <a href="/Game" className="app_header">TIC TAC TOE</a>
       <ul className="navlist">
-        {/* <li className="item active">
+        <li className="item active">
           <a href="/MatchHistory">Match History </a>
-        </li> */}
+        </li>
         <li className="item active">
           <a href="/Game">Game</a>
         </li>
