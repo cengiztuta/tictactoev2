@@ -10,10 +10,11 @@ const Board = () => {
   const [status, setStatus] = useState("");
   const [gameHistory, setGameHistory] = useState([]);
   const [updatedUser, setUpdatedUser] = useState({});
-  const loggedUser = auth.currentUser.uid;
-  const asd = auth.currentUser.gameHistory;
-  const userDocRef = doc(db, "users", loggedUser);
   const [user, setUser] = useState({});
+
+  
+  
+  const userDocRef = doc(db, "users", user.uid);
   useEffect(() => {
     const getUser = async () => {
       const userDoc = await getDoc(userDocRef);
