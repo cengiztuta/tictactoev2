@@ -13,11 +13,3 @@
     cursor: wait
 }
 
-.box:hover {
-    background-color: #0e66ad;
-}
-
-.box:active {
-    transform: translateY(4px);
-    box-shadow: 4px 5px #666;
-  }
