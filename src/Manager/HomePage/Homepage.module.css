@@ -1,0 +1,6 @@
+.homepage {
+    margin-top: 250px;
+    display: grid;
+    row-gap: 30px;
+    justify-content: center;
+}

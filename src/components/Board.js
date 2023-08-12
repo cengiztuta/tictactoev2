@@ -12,9 +12,8 @@ const Board = () => {
   const [updatedUser, setUpdatedUser] = useState({});
   const [user, setUser] = useState({});
 
-  
-  
-  const userDocRef = doc(db, "users", user.uid);
+ const  loggedUser = auth.currentUser.uid;
+  const userDocRef = doc(db, "users", loggedUser);
   useEffect(() => {
     const getUser = async () => {
       const userDoc = await getDoc(userDocRef);

@@ -1,0 +1,8 @@
+.replay {
+    display: grid;
+    row-gap: 10px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    font-weight: bolder;
+}

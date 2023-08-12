@@ -166,6 +166,14 @@ const HomePage = () => {
               >
                 Sign UP
               </button>
+              <button
+                className="button"
+                onClick={() => {
+                  navigate("/Homepage");
+                }}
+              >
+                MultiPlayer
+              </button>
             </div>
           </div>
           <br />
