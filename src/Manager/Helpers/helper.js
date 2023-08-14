@@ -1,3 +1,5 @@
+import { async } from "@firebase/util";
+
 export const deserialize = (arr) => {
     let ans = [[], [] , []];
 
@@ -20,6 +22,8 @@ export const serialize = (arr) => {
 
     return ans;
 }
+
+
 
 export const checkWinner = (arr, row, col) => {
     let symbol = arr[row][col];

@@ -15,27 +15,26 @@ import CreateRoom from "./Manager/HomePage/createRoom";
 import Manager from "./Manager/Manager";
 import { Provider } from "react-redux";
 import { store } from "./store";
-import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/Game" element={<Game />} />
-          <Route path="/LeaderBoard" element={<LeaderBoard />} />
-          <Route path="/Profile" element={<Profilepage />} />
-          <Route path="/Signup" element={<PhoneSignup />} />
-          <Route path="/MatchHistory" element={<MatchHistory />} />
-          <Route path="/Homepage" element={<Homepage />} />
-          <Route path="/CreateRoom" element={<CreateRoom />} />
-          <Route path="/JoinRoom" element={<JoinRoom />} />
-          <Route path="/start" element={<Manager />} />
-        </Routes>
-      </BrowserRouter>
-    </Provider>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/Game" element={<Game />} />
+            <Route path="/LeaderBoard" element={<LeaderBoard />} />
+            <Route path="/Profile" element={<Profilepage />} />
+            <Route path="/Signup" element={<PhoneSignup />} />
+            <Route path="/MatchHistory" element={<MatchHistory />} />
+            <Route path="/Homepage" element={<Homepage />} />
+            <Route path="/CreateRoom" element={<CreateRoom />} />
+            <Route path="/JoinRoom" element={<JoinRoom />} />
+            <Route path="/start" element={<Manager />} />
+          </Routes>
+        </BrowserRouter>
+      </Provider>
   </React.StrictMode>
 );
 

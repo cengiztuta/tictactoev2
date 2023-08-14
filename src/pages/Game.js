@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Board from "../components/Board";
-import { Button, Text } from "@chakra-ui/react";
 import { auth, db } from "../pages/firebase-config";
 import { getDoc, doc } from "firebase/firestore";
 import Navbar from "../components/Navbar/Navbar";
